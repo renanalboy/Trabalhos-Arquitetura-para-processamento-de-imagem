@@ -216,7 +216,6 @@ for i in range(len(array_sobel)):
 
 #Volta a imagem para o formato de matriz
 image = fc.convToMatriz(col, row, array_sobel)
-#print(image)
 
 #Transforma matriz em imagem novamente        
 fc.convToImage2(col, row, array_sobel)
@@ -228,80 +227,82 @@ fc.convToImage2(col, row, array_sobel)
 #Imagem array que esta sendo utiliozada: array_sobel
 
 #Declaração/inicialização de arrays para os casos G(x)^2, GxGy e G(y)^2
-gx = np.zeros(len(array_sobel))
-gxy = np.zeros(len(array_sobel))
-gy = np.zeros(len(array_sobel))
+#gx = np.zeros(len(array_sobel))
+#gxy = np.zeros(len(array_sobel))
+#gy = np.zeros(len(array_sobel))
 #
 ##Extensão arrays
-gx_ext = fc.anexo(array_sobel, 12)
-gxy_ext = fc.anexo(array_sobel, 12)
-gy_ext = fc.anexo(array_sobel, 12)
+#gx_ext = fc.anexo(array_sobel, 12)
+#gxy_ext = fc.anexo(array_sobel, 12)
+#gy_ext = fc.anexo(array_sobel, 12)
 #
 ##Curva gaussiana com gamma x
-curva_x = [1, 4, 7, 4, 1, 4, 16, 26, 16, 4, 7, 26, 41, 26, 7, 1, 4, 7, 4, 1, 4, 16, 26, 16, 4]
+#Necessário alterar o valor da curva para o valor do gamma correto(gamma=4)
+#curva_x = [1, 4, 7, 4, 1, 4, 16, 26, 16, 4, 7, 26, 41, 26, 7, 1, 4, 7, 4, 1, 4, 16, 26, 16, 4]
 #
 ##Curva gaussiana com gamma y
-curva_y = [1, 4, 7, 4, 1, 4, 16, 26, 16, 4, 7, 26, 41, 26, 7, 1, 4, 7, 4, 1, 4, 16, 26, 16, 4]
+#Necessário alterar o valor da curva para o valor do gamma correto(gamma=0.5)
+#curva_y = [1, 4, 7, 4, 1, 4, 16, 26, 16, 4, 7, 26, 41, 26, 7, 1, 4, 7, 4, 1, 4, 16, 26, 16, 4]
 #
 #Aplicação das curvas nos arrays
 #G(x)^2
-for i in range(len(array_result)):
-    array_analise = gx_ext[i:i+25]
-    pixel_gx = fc.gauss_5x5(array_analise,curva_x)
-    gx[i] = pixel_gx
+#for i in range(len(array_result)):
+#   array_analise = gx_ext[i:i+25]
+#    pixel_gx = fc.gauss_5x5(array_analise,curva_x)
+    #gx[i] = pixel_gx
     
 #G(y)^2   
-for i in range(len(array_result)):
-    array_analise = gy_ext[i:i+25]
-    pixel_gy = fc.gauss_5x5(array_analise,curva_y)
-    gy[i] = pixel_gy
+#for i in range(len(array_result)):
+#    array_analise = gy_ext[i:i+25]
+#    pixel_gy = fc.gauss_5x5(array_analise,curva_y)
+#    gy[i] = pixel_gy
     
 #Gx,Gy   
-for i in range(len(array_result)):
-    array_analise = gxy_ext[i:i+25]
-    pixel_gx = fc.gauss_5x5(array_analise,curva_x)
-    gxy[i] = pixel_gx
+#for i in range(len(array_result)):
+#    array_analise = gxy_ext[i:i+25]
+#    pixel_gx = fc.gauss_5x5(array_analise,curva_x)
+#    gxy[i] = pixel_gx
     
-gxy_ext = fc.anexo(gxy, 12)
+#gxy_ext = fc.anexo(gxy, 12)
 
-for i in range(len(array_result)):
-    array_analise = gxy_ext[i:i+25]
-    pixel_gy = fc.gauss_5x5(array_analise,curva_y)
-    gxy[i] = pixel_gy
+#for i in range(len(array_result)):
+#    array_analise = gxy_ext[i:i+25]
+#    pixel_gy = fc.gauss_5x5(array_analise,curva_y)
+#    gxy[i] = pixel_gy
 
 # =============================================================================#
 #   Aplicação gauss 5x5 (com gamma = 1) em G(x)^2, GxGy e G(y)^2
 # =============================================================================#
 
 #Extende a array do passo anterior
-array_gx_ext = fc.anexo(gy, 12)
-array_gxy_ext = fc.anexo(gxy, 12)
-array_gy_ext = fc.anexo(gy, 12)
+#array_gx_ext = fc.anexo(gy, 12)
+#array_gxy_ext = fc.anexo(gxy, 12)
+#array_gy_ext = fc.anexo(gy, 12)
 
 #kernel para gaussiano 5x5
-kernel = [1, 4, 7, 4, 1, 4, 16, 26, 16, 4, 7, 26, 41, 26, 7, 1, 4, 7, 4, 1, 4, 16, 26, 16, 4]
+#kernel = [1, 4, 7, 4, 1, 4, 16, 26, 16, 4, 7, 26, 41, 26, 7, 1, 4, 7, 4, 1, 4, 16, 26, 16, 4]
 
 #Aplicação do filtro gaussiano 5x5 (em vetor) sobre os vetores
-array_gauss_5x5 = np.zeros(len(array_result))
+#array_gauss_5x5 = np.zeros(len(array_result))
 
 #Gx
-for i in range(len(array_result)):
-    array_analise = array_gx_ext[i:i+25]
-    pixel = fc.gauss_5x5(array_analise,kernel)
-    gx[i] = pixel
+#for i in range(len(array_result)):
+#    array_analise = array_gx_ext[i:i+25]
+#    pixel = fc.gauss_5x5(array_analise,kernel)
+#    gx[i] = pixel
     
 #Gy
-for i in range(len(array_result)):
-    array_analise = array_gxy_ext[i:i+25]
-    pixel = fc.gauss_5x5(array_analise,kernel)
-    gx[i] = pixel
+#for i in range(len(array_result)):
+#    array_analise = array_gxy_ext[i:i+25]
+#    pixel = fc.gauss_5x5(array_analise,kernel)
+#    gx[i] = pixel
 
 
 #Gxy
-for i in range(len(array_result)):
-    array_analise = array_gy_ext[i:i+25]
-    pixel = fc.gauss_5x5(array_analise,kernel)
-    gx[i] = pixel
+#for i in range(len(array_result)):
+#    array_analise = array_gy_ext[i:i+25]
+#    pixel = fc.gauss_5x5(array_analise,kernel)
+#    gx[i] = pixel
 
 # =============================================================================#
 #   
